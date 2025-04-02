@@ -35,7 +35,9 @@ void find_paths(const std::string& start,
     // Explore neighbors
     if (adj_list.find(start) != adj_list.end()) {
         for (const std::string& neighbor : adj_list.at(start)) {
-            find_paths(neighbor, adj_list, path, visited, all_paths,act_dep);
+            std::vector<std::string> new_path=path;
+            std::unordered_set<std::string> new_visited=visited;
+            find_paths(neighbor, adj_list,new_path, new_visited, all_paths,act_dep);
         }
     }
 
