@@ -25,6 +25,7 @@ void find_paths(const std::string& start,
     if(visited.find(start) != visited.end()) {
         path.push_back(start);
         all_paths.push_back(path);
+        path.pop_back();// if no copies are used in the call below
         return;
     }
 
@@ -46,7 +47,7 @@ void find_paths(const std::string& start,
         all_paths.push_back(path);
     }
 
-    // Backtrack: remove current node from path and visited set
+    // Backtrack: remove current node from path and visited set. if no copies are used in the call above
     path.pop_back();
     visited.erase(start);
 }
