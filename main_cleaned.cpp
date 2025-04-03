@@ -57,7 +57,7 @@ void find_paths(const std::string& start,
     if(visited.find(start) != visited.end()) {
         path.push_back(start);
         all_paths.push_back(path);
-        path.pop_back(); //if no copies are used below
+        //path.pop_back(); //if no copies are used below
         return;
     }
 
@@ -68,10 +68,10 @@ void find_paths(const std::string& start,
     // Start a search for each neighbour of the node
     if (adj_list.find(start) != adj_list.end()) {
         for (const std::string& neighbor : adj_list.at(start)) {
-            // std::vector<std::string> new_path=path;
-            // std::unordered_set<std::string> new_visited=visited;
-            // find_paths(neighbor, adj_list,new_path, new_visited, all_paths,act_dep);
-            find_paths(neighbor, adj_list,path, visited, all_paths,act_dep);
+             std::vector<std::string> new_path=path;
+             std::unordered_set<std::string> new_visited=visited;
+             find_paths(neighbor, adj_list,new_path, new_visited, all_paths,act_dep);
+            //find_paths(neighbor, adj_list,path, visited, all_paths,act_dep);
         }
     }
 
@@ -81,8 +81,8 @@ void find_paths(const std::string& start,
     }
 
     // Backtrack: remove current node from path and visited set. if no copies are used above
-    path.pop_back();
-    visited.erase(start);
+    //path.pop_back();
+    //visited.erase(start);
 }
 
 
