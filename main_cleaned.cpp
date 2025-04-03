@@ -58,7 +58,6 @@ void find_paths(const std::string& start,
         path.push_back(start);
         all_paths.push_back(path);
         path.pop_back();
-        visited.erase(start);
         return;
     }
 
