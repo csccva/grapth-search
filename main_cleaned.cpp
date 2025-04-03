@@ -44,19 +44,21 @@ SOFTWARE.
 
 // Function to find all paths while tracking visited nodes
 void find_paths(const std::string& start, 
-               const std::unordered_map<std::string, std::vector<std::string>>& adj_list, 
+               const std::unordered_map<std::string, std::vector<std::string> >& adj_list, 
                std::vector<std::string>& path,
                std::unordered_set<std::string>& visited, 
-               std::vector<std::vector<std::string>>& all_paths,
+               std::vector<std::vector<std::string> >& all_paths,
                std::unordered_map<std::string, bool>& act_dep) {
     
     // This will present starting new branch if the node is already in a tree
-    //act_dep[start]=false; 
+    act_dep[start]=false; 
 
     // Check if the node has been visited in the present call
     if(visited.find(start) != visited.end()) {
         path.push_back(start);
         all_paths.push_back(path);
+        path.pop_back();
+        visited.erase(start);
         return;
     }
 
@@ -67,9 +69,10 @@ void find_paths(const std::string& start,
     // Start a search for each neighbour of the node
     if (adj_list.find(start) != adj_list.end()) {
         for (const std::string& neighbor : adj_list.at(start)) {
-            std::vector<std::string> new_path=path;
-            std::unordered_set<std::string> new_visited=visited;
-            find_paths(neighbor, adj_list,new_path, new_visited, all_paths,act_dep);
+            // std::vector<std::string> new_path=path;
+            // std::unordered_set<std::string> new_visited=visited;
+            // find_paths(neighbor, adj_list,new_path, new_visited, all_paths,act_dep);
+            find_paths(neighbor, adj_list,path, visited, all_paths,act_dep);
         }
     }
 
@@ -78,9 +81,9 @@ void find_paths(const std::string& start,
         all_paths.push_back(path);
     }
 
-    // Backtrack: remove current node from path and visited set. Needed for branching. Not needed iff copies are used
-    //path.pop_back();
-    //visited.erase(start);
+    // Backtrack: remove current node from path and visited set. Needed to 
+    path.pop_back();
+    visited.erase(start);
 }
 
 
@@ -104,7 +107,7 @@ int main() {
     std::vector<std::string> vleft(unique_values_left.begin(), unique_values_left.end());
 
     //Build Adjancency List
-    std::unordered_map<std::string, std::vector<std::string>> adj_list;
+    std::unordered_map<std::string, std::vector<std::string> > adj_list;
     for(int i=0;i<vleft.size();i++){
         std:: string pstring= vleft[i];
         for(int j=0; j<left_column.size();j++){
@@ -118,7 +121,7 @@ int main() {
     for (const auto& node : adj_list) {
         act_dep[node.first]=true;
     }
-    std::vector<std::vector<std::string>> all_paths;
+    std::vector<std::vector<std::string> > all_paths;
     for (const auto& node : adj_list) {
         if(act_dep[node.first]){
             std::vector<std::string> path;
