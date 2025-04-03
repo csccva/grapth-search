@@ -78,9 +78,9 @@ void find_paths(const std::string& start,
         all_paths.push_back(path);
     }
 
-    // Backtrack: remove current node from path and visited set. Needed to 
-    path.pop_back();
-    visited.erase(start);
+    // Backtrack: remove current node from path and visited set. Needed for branching. Not needed iff copies are used
+    //path.pop_back();
+    //visited.erase(start);
 }
 
 
