@@ -176,14 +176,5 @@ int main() {
         std::cout << ps << std::endl;
     }
 
-/*     std::cout << "Adjacency list for the Graph: " << std::endl;
-    for(int i=0;i<adj_list.size();i++){
-        std::cout << vleft[i] << " --> ";
-        for(auto j : adj_list[vleft[i]]){
-            std::cout << j << " ";
-        }
-        std::cout << std::endl;
-    }
- */
     return 0;
 }
