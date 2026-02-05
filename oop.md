@@ -455,7 +455,7 @@ if cycle:
 
 ## Why OOP Shines in This Example
 
-Let's revisit the original code you provided. It has a `find_paths()` function that explores the graph, tracking visited nodes and building up paths. In a procedural style, you'd call it like:
+Let's revisit the original code. It has a `find_paths()` function that explores the graph, tracking visited nodes and building up paths. In a procedural style, you'd call it like:
 
 ```c
 find_paths(start_node, graph, path, visited, all_paths, act_dep);
